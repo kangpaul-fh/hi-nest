@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
@@ -44,10 +43,7 @@ export class MoviesController {
 
   @Patch('/:id')
   patch(@Param('id') movieID: string, @Body() updateData) {
-    return {
-      updatedMovie: movieID,
-      ...updateData,
-    };
+    return this.moviesService.update(movieID, updateData);
   }
 }
 
@@ -59,3 +55,6 @@ export class MoviesController {
 
 // *** Single-responsibility principle
 // 하나의 module, class 혹은 function이 하나의 기능은 꼭 책임져야 한다는 것.
+
+// To do next
+// updateData 유효성 검사
