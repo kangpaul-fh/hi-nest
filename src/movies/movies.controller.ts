@@ -11,6 +11,8 @@ import { CreateMovieDto } from './dto/create-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
+//NestJS가 MovieService를 import하고 Controller에 inject(주입)할거다.
+
 @Controller('movies')
 export class MoviesController {
   // 이 생성자 덕북엔 this.moviesService.getAll() 쓸 수 있다.
