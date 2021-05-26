@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { CreateMovieDto } from './dto/create-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -28,21 +29,22 @@ export class MoviesController {
   // Search 부분이 @Get('/:id') 보다 밑에 위치하면 nestjs는 search를 id로 판단. -> 문제가됨
 
   @Get('/:id')
-  getOne(@Param('id') movieID: string): Movie {
+  getOne(@Param('id') movieID: number): Movie {
+    console.log(typeof movieID);
     return this.moviesService.getOne(movieID);
   }
 
   @Post()
-  create(@Body() movieData) {
+  create(@Body() movieData: CreateMovieDto) {
     return this.moviesService.create(movieData);
   }
   @Delete('/:id')
-  remove(@Param('id') movieID: string) {
+  remove(@Param('id') movieID: number) {
     return this.moviesService.deleteOne(movieID);
   }
 
   @Patch('/:id')
-  patch(@Param('id') movieID: string, @Body() updateData) {
+  patch(@Param('id') movieID: number, @Body() updateData) {
     return this.moviesService.update(movieID, updateData);
   }
 }
@@ -58,3 +60,5 @@ export class MoviesController {
 
 // To do next
 // updateData 유효성 검사
+
+// DTO: Data Transfer Object
